@@ -1,0 +1,14 @@
+{
+  "name": "@agent-vid/backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Backend not yet implemented - see issue #3'",
+    "build": "echo 'Backend not yet implemented - see issue #3'",
+    "lint": "echo 'Backend not yet implemented - see issue #3'"
+  },
+  "dependencies": {
+    "@agent-vid/shared": "workspace:*"
+  }
+}
