@@ -11,8 +11,12 @@
   },
   "dependencies": {
     "@agent-vid/shared": "workspace:*",
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
+    "@reduxjs/toolkit": "^2.5.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.7",
