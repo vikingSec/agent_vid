@@ -19,10 +19,16 @@ export type Operation =
 export interface TrimOperation {
   type: 'trim';
   clipId: string;
-  previousStart: number;
-  previousEnd: number;
-  newStart: number;
-  newEnd: number;
+  // Trim points (within source video)
+  previousTrimStart: number;
+  previousTrimEnd: number;
+  newTrimStart: number;
+  newTrimEnd: number;
+  // Timeline position
+  previousStartTime: number;
+  previousEndTime: number;
+  newStartTime: number;
+  newEndTime: number;
 }
 
 export interface AddTextOperation {

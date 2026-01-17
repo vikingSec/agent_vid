@@ -28,8 +28,10 @@ export const applyOperation = (
         updateVideoClip({
           clipId: operation.clipId,
           updates: {
-            trimStart: operation.newStart,
-            trimEnd: operation.newEnd,
+            trimStart: operation.newTrimStart,
+            trimEnd: operation.newTrimEnd,
+            startTime: operation.newStartTime,
+            endTime: operation.newEndTime,
           },
         })
       );
@@ -58,8 +60,10 @@ export const reverseOperation = (
         updateVideoClip({
           clipId: operation.clipId,
           updates: {
-            trimStart: operation.previousStart,
-            trimEnd: operation.previousEnd,
+            trimStart: operation.previousTrimStart,
+            trimEnd: operation.previousTrimEnd,
+            startTime: operation.previousStartTime,
+            endTime: operation.previousEndTime,
           },
         })
       );
@@ -121,7 +125,11 @@ export const historyMiddleware: Middleware =
     }
 
     // Capture state before action
-    if (updateVideoClip.match(typedAction) && !isUndoRedoInProgress) {
+    if (
+      (updateVideoClip.match(typedAction) ||
+        removeVideoClip.match(typedAction)) &&
+      !isUndoRedoInProgress
+    ) {
       captureClipState(prevState);
     }
 
@@ -137,28 +145,49 @@ export const historyMiddleware: Middleware =
     if (updateVideoClip.match(typedAction)) {
       const { clipId, updates } = typedAction.payload as {
         clipId: string;
-        updates: { trimStart?: number; trimEnd?: number };
+        updates: {
+          trimStart?: number;
+          trimEnd?: number;
+          startTime?: number;
+          endTime?: number;
+        };
       };
       const prevClip = previousClipState[clipId];
 
-      if (
-        prevClip &&
-        (updates.trimStart !== undefined || updates.trimEnd !== undefined)
-      ) {
-        const operation: Operation = {
-          type: 'trim',
-          clipId,
-          previousStart: prevClip.trimStart,
-          previousEnd: prevClip.trimEnd,
-          newStart: updates.trimStart ?? prevClip.trimStart,
-          newEnd: updates.trimEnd ?? prevClip.trimEnd,
-        };
+      if (prevClip) {
+        // Check if any trim-related values changed
+        const trimStartChanged =
+          updates.trimStart !== undefined &&
+          updates.trimStart !== prevClip.trimStart;
+        const trimEndChanged =
+          updates.trimEnd !== undefined &&
+          updates.trimEnd !== prevClip.trimEnd;
+        const startTimeChanged =
+          updates.startTime !== undefined &&
+          updates.startTime !== prevClip.startTime;
+        const endTimeChanged =
+          updates.endTime !== undefined &&
+          updates.endTime !== prevClip.endTime;
 
-        // Only record if values actually changed
         if (
-          operation.previousStart !== operation.newStart ||
-          operation.previousEnd !== operation.newEnd
+          trimStartChanged ||
+          trimEndChanged ||
+          startTimeChanged ||
+          endTimeChanged
         ) {
+          const operation: Operation = {
+            type: 'trim',
+            clipId,
+            previousTrimStart: prevClip.trimStart,
+            previousTrimEnd: prevClip.trimEnd,
+            newTrimStart: updates.trimStart ?? prevClip.trimStart,
+            newTrimEnd: updates.trimEnd ?? prevClip.trimEnd,
+            previousStartTime: prevClip.startTime,
+            previousEndTime: prevClip.endTime,
+            newStartTime: updates.startTime ?? prevClip.startTime,
+            newEndTime: updates.endTime ?? prevClip.endTime,
+          };
+
           store.dispatch(
             recordOperation({
               operation,
