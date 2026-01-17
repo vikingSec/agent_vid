@@ -1,0 +1,57 @@
+.timeline {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--bg-primary);
+}
+
+.timeline-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.timeline-tracks {
+  display: flex;
+  flex-direction: column;
+}
+
+.track {
+  display: flex;
+  border-bottom: 1px solid var(--bg-tertiary);
+  min-height: 48px;
+}
+
+.track:last-child {
+  border-bottom: none;
+}
+
+.track-label {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border-right: 1px solid var(--bg-primary);
+}
+
+.track-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.track-placeholder {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
