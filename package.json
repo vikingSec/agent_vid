@@ -1,0 +1,24 @@
+{
+  "name": "agent-vid",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An in-browser video editor designed for AI agents",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean && rm -rf node_modules"
+  },
+  "keywords": [
+    "video-editor",
+    "ai-agent",
+    "mcp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

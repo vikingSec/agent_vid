@@ -1,0 +1,14 @@
+{
+  "name": "@agent-vid/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Frontend not yet implemented - see issue #2'",
+    "build": "echo 'Frontend not yet implemented - see issue #2'",
+    "lint": "echo 'Frontend not yet implemented - see issue #2'"
+  },
+  "dependencies": {
+    "@agent-vid/shared": "workspace:*"
+  }
+}
