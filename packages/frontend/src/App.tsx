@@ -1,8 +1,13 @@
 import { VideoPlayer } from './components/VideoPlayer';
 import { Timeline } from './components/Timeline';
 import { VideoUploader } from './components/VideoUploader';
+import { HistoryPanel } from './components/HistoryPanel';
+import { useUndoRedoShortcuts } from './hooks/useUndoRedoShortcuts';
 
 export function App() {
+  // Enable undo/redo keyboard shortcuts globally
+  useUndoRedoShortcuts();
+
   return (
     <div className="app">
       <header className="app-header">
@@ -12,6 +17,7 @@ export function App() {
         <div className="editor-layout">
           <aside className="sidebar">
             <VideoUploader />
+            <HistoryPanel />
           </aside>
           <div className="editor-container">
             <VideoPlayer />
