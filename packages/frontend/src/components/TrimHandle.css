@@ -1,0 +1,45 @@
+.trim-handle {
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  cursor: ew-resize;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trim-handle-left {
+  left: 0;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+
+.trim-handle-right {
+  right: 0;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(to left, var(--accent), transparent);
+}
+
+.trim-handle:hover {
+  background-color: var(--accent);
+}
+
+.trim-handle-grip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+}
+
+.trim-handle-line {
+  width: 4px;
+  height: 1px;
+  background-color: var(--text-primary);
+  opacity: 0.8;
+}
+
+.trim-handle:hover .trim-handle-line {
+  opacity: 1;
+}

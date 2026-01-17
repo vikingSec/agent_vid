@@ -1,18 +1,47 @@
 import { useState, useRef, type DragEvent, type ChangeEvent } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { uploadVideo, loadVideoFromUrl, clearError } from '../stores/videoSlice';
+import { addVideoClip, createProject } from '../stores/projectSlice';
+import type { VideoClip, VideoMetadata } from '@agent-vid/shared';
 import './VideoUploader.css';
 
-const ACCEPTED_FORMATS = ['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo'];
+const ACCEPTED_FORMATS = [
+  'video/mp4',
+  'video/webm',
+  'video/quicktime',
+  'video/x-msvideo',
+];
 
 export function VideoUploader() {
   const dispatch = useAppDispatch();
-  const { isLoading, uploadProgress, error } = useAppSelector((state) => state.video);
+  const { isLoading, uploadProgress, error } = useAppSelector(
+    (state) => state.video
+  );
+  const project = useAppSelector((state) => state.project.project);
 
   const [isDragging, setIsDragging] = useState(false);
   const [urlInput, setUrlInput] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const ensureProject = async () => {
+    if (!project) {
+      await dispatch(createProject('Untitled Project')).unwrap();
+    }
+  };
+
+  const addClipToTimeline = (metadata: VideoMetadata) => {
+    const clip: VideoClip = {
+      id: uuidv4(),
+      sourceFile: metadata.id,
+      startTime: 0,
+      endTime: metadata.duration || 10,
+      trimStart: 0,
+      trimEnd: metadata.duration || 10,
+    };
+    dispatch(addVideoClip(clip));
+  };
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
@@ -24,26 +53,32 @@ export function VideoUploader() {
     setIsDragging(false);
   };
 
-  const handleDrop = (e: DragEvent) => {
+  const handleDrop = async (e: DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
 
     const file = e.dataTransfer.files[0];
     if (file && ACCEPTED_FORMATS.includes(file.type)) {
-      dispatch(uploadVideo(file));
+      await ensureProject();
+      const result = await dispatch(uploadVideo(file)).unwrap();
+      addClipToTimeline(result);
     }
   };
 
-  const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      dispatch(uploadVideo(file));
+      await ensureProject();
+      const result = await dispatch(uploadVideo(file)).unwrap();
+      addClipToTimeline(result);
     }
   };
 
-  const handleUrlLoad = () => {
+  const handleUrlLoad = async () => {
     if (urlInput.trim()) {
-      dispatch(loadVideoFromUrl(urlInput.trim()));
+      await ensureProject();
+      const result = await dispatch(loadVideoFromUrl(urlInput.trim())).unwrap();
+      addClipToTimeline(result);
       setUrlInput('');
     }
   };
@@ -73,7 +108,10 @@ export function VideoUploader() {
         {isLoading ? (
           <div className="upload-progress">
             <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${uploadProgress}%` }} />
+              <div
+                className="progress-fill"
+                style={{ width: `${uploadProgress}%` }}
+              />
             </div>
             <span>Uploading... {uploadProgress}%</span>
           </div>

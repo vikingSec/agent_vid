@@ -2,11 +2,14 @@
   background-color: var(--bg-secondary);
   border-radius: 8px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .timeline-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0.75rem 1rem;
   background-color: var(--bg-tertiary);
   border-bottom: 1px solid var(--bg-primary);
@@ -15,6 +18,48 @@
 .timeline-title {
   font-weight: 500;
   font-size: 0.875rem;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.zoom-button {
+  width: 24px;
+  height: 24px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-button:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.zoom-level {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  min-width: 50px;
+  text-align: center;
+}
+
+.timeline-scroll-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.timeline-content {
+  position: relative;
+  min-width: 100%;
 }
 
 .timeline-tracks {
@@ -26,6 +71,7 @@
   display: flex;
   border-bottom: 1px solid var(--bg-tertiary);
   min-height: 48px;
+  position: relative;
 }
 
 .track:last-child {
@@ -34,6 +80,7 @@
 
 .track-label {
   width: 80px;
+  min-width: 80px;
   display: flex;
   align-items: center;
   padding: 0 0.75rem;
@@ -41,6 +88,9 @@
   color: var(--text-secondary);
   background-color: var(--bg-tertiary);
   border-right: 1px solid var(--bg-primary);
+  position: sticky;
+  left: 0;
+  z-index: 5;
 }
 
 .track-content {
@@ -48,10 +98,40 @@
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  position: relative;
 }
 
 .track-placeholder {
   font-size: 0.75rem;
   color: var(--text-secondary);
   font-style: italic;
+}
+
+/* Playhead */
+.timeline-playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.playhead-head {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  width: 11px;
+  height: 11px;
+  background-color: #ff4444;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+}
+
+.playhead-line {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  width: 1px;
+  bottom: 0;
+  background-color: #ff4444;
 }

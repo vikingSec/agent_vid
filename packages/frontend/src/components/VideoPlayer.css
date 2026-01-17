@@ -155,3 +155,40 @@
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--bg-tertiary);
 }
+
+/* Trim region overlay on progress bar */
+.progress-trim-inactive {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.progress-trim-active {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(59, 130, 246, 0.3);
+  border-left: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+.progress-bar-bg {
+  position: relative;
+}
+
+/* Trim info display */
+.trim-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background-color: rgba(59, 130, 246, 0.1);
+  border-top: 1px solid var(--accent);
+}
+
+.trim-hint {
+  color: var(--text-secondary);
+  font-style: italic;
+}

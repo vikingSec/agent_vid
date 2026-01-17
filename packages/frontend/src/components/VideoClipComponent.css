@@ -1,0 +1,75 @@
+.video-clip {
+  position: absolute;
+  height: calc(100% - 8px);
+  top: 4px;
+  background-color: var(--accent);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+  min-width: 40px;
+}
+
+.video-clip:hover {
+  box-shadow: 0 0 0 1px var(--text-primary);
+}
+
+.video-clip-selected {
+  box-shadow: 0 0 0 2px var(--text-primary);
+}
+
+.video-clip-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 8px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.video-clip-thumbnail {
+  width: 40px;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.video-clip-name {
+  flex: 1;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-clip-duration {
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+.video-clip-trim-region {
+  position: absolute;
+  bottom: 2px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+.video-clip:not(.video-clip-selected) .video-clip-trim-region {
+  display: none;
+}
+
+.trim-time {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1px 3px;
+  border-radius: 2px;
+}

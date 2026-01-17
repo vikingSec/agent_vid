@@ -1,0 +1,42 @@
+.time-ruler {
+  position: relative;
+  height: 24px;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--bg-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.time-tick {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.time-tick::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background-color: var(--text-secondary);
+}
+
+.time-tick-major::after {
+  height: 12px;
+  background-color: var(--text-primary);
+}
+
+.time-tick-minor::after {
+  height: 6px;
+  opacity: 0.5;
+}
+
+.time-label {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.625rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
