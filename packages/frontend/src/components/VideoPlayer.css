@@ -1,0 +1,194 @@
+.video-player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  position: relative;
+  min-height: 300px;
+}
+
+.video-container video {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-placeholder {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.video-placeholder p {
+  margin-bottom: 0.5rem;
+}
+
+.video-placeholder-hint {
+  font-size: 0.875rem;
+}
+
+.video-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+}
+
+.play-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.play-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background-color: var(--bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--accent);
+  transition: width 0.1s ease;
+}
+
+.progress-bar-container:hover .progress-bar-bg {
+  height: 8px;
+}
+
+.time-display {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 90px;
+}
+
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mute-button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg-primary);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.video-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--bg-tertiary);
+}
+
+/* Trim region overlay on progress bar */
+.progress-trim-inactive {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.progress-trim-active {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(59, 130, 246, 0.3);
+  border-left: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+.progress-bar-bg {
+  position: relative;
+}
+
+/* Trim info display */
+.trim-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background-color: rgba(59, 130, 246, 0.1);
+  border-top: 1px solid var(--accent);
+}
+
+.trim-hint {
+  color: var(--text-secondary);
+  font-style: italic;
+}

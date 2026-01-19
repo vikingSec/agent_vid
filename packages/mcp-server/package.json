@@ -1,0 +1,14 @@
+{
+  "name": "@agent-vid/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'MCP server not yet implemented - see issue #9'",
+    "build": "echo 'MCP server not yet implemented - see issue #9'",
+    "lint": "echo 'MCP server not yet implemented - see issue #9'"
+  },
+  "dependencies": {
+    "@agent-vid/shared": "workspace:*"
+  }
+}
